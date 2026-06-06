@@ -76,9 +76,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const { products, total, pages, page, categories } = await getProducts(params);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Shop</h1>
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-2">Shop</h1>
         <p className="text-neutral-500">
           <LiveProductCount
             initialTotal={total}
@@ -95,12 +95,12 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
         </p>
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
         <Suspense fallback={<LoadingSpinner />}>
           <ProductFilters categories={categories} />
         </Suspense>
 
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           <ShopProductList
             initialProducts={products}
             query={{
@@ -117,7 +117,7 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
           />
 
           {pages > 1 && (
-            <div className="flex justify-center gap-2 mt-10">
+            <div className="flex flex-wrap justify-center gap-2 mt-8 sm:mt-10">
               {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
                 <a
                   key={p}

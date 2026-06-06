@@ -65,9 +65,9 @@ export default function AdminDeletedProductsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
         <div>
-          <h1 className="text-2xl font-bold">Deleted Products</h1>
+          <h1 className="text-xl sm:text-2xl font-bold">Deleted Products</h1>
           <p className="text-sm text-neutral-500 mt-1">
             Products removed from the store are kept here in MongoDB
           </p>

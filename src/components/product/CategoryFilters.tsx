@@ -88,7 +88,7 @@ export default function CategoryFilters({ slug }: CategoryFiltersProps) {
     <>
       <button
         onClick={() => setMobileOpen(true)}
-        className="lg:hidden flex items-center gap-2 px-4 py-2 border border-border text-sm mb-4"
+        className="lg:hidden flex items-center justify-center gap-2 w-full px-4 py-2 border border-border text-sm mb-4"
       >
         <SlidersHorizontal className="w-4 h-4" /> Filters
       </button>

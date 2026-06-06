@@ -32,7 +32,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="relative h-[70vh] min-h-[500px] bg-black text-white flex items-center">
+      <section className="relative h-[55vh] sm:h-[65vh] lg:h-[70vh] min-h-[380px] sm:min-h-[480px] bg-black text-white flex items-center">
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1920&q=80"
@@ -47,7 +47,7 @@ export default async function HomePage() {
             <p className="text-sm uppercase tracking-[0.3em] mb-4 text-neutral-300">
               Premium Collection 2026
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-4 sm:mb-6">
               Elevate Your Style with Bazaarly
             </h1>
             <p className="text-neutral-300 text-lg mb-8 leading-relaxed">

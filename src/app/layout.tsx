@@ -4,7 +4,7 @@ import "./globals.css";
 import Providers from "@/components/layout/Providers";
 import ThemeScript from "@/components/layout/ThemeScript";
 import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import ConditionalFooter from "@/components/layout/ConditionalFooter";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -40,7 +40,7 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main className="min-h-screen">{children}</main>
-          <Footer />
+          <ConditionalFooter />
         </Providers>
       </body>
     </html>

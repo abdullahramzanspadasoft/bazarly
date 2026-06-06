@@ -91,9 +91,9 @@ export default function AdminProductsPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Manage Products</h1>
-        <div className="flex items-center gap-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold">Manage Products</h1>
+        <div className="flex items-center gap-2 flex-wrap">
           <Link href="/admin/deleted">
             <Button size="sm" variant="outline">
               <Trash2 className="w-4 h-4 mr-1" /> Deleted
@@ -105,8 +105,8 @@ export default function AdminProductsPage() {
         </div>
       </div>
 
-      <div className="border border-neutral-200 overflow-x-auto">
-        <table className="w-full text-sm">
+      <div className="border border-border overflow-x-auto -mx-3 sm:mx-0 rounded-sm">
+        <table className="w-full text-sm min-w-[640px]">
           <thead className="bg-neutral-50">
             <tr>
               <th className="text-left p-3">Product</th>

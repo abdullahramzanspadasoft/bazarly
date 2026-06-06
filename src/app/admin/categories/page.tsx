@@ -57,8 +57,8 @@ export default function AdminCategoriesPage() {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Manage Categories</h1>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 sm:mb-6">
+        <h1 className="text-xl sm:text-2xl font-bold">Manage Categories</h1>
         <Button size="sm" onClick={() => setModalOpen(true)}>
           <Plus className="w-4 h-4 mr-1" /> Add Category
         </Button>

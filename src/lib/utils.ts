@@ -16,6 +16,10 @@ export function calculateDiscount(price: number, discount: number): number {
   return price - (price * discount) / 100;
 }
 
+export function isUploadedImage(src: string): boolean {
+  return src.startsWith("/uploads/") || src.startsWith("/api/images/");
+}
+
 export function slugify(text: string): string {
   return text
     .toLowerCase()

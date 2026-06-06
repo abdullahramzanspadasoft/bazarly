@@ -27,16 +27,16 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-      <h1 className="text-3xl font-bold mb-8">Shopping Cart ({getItemCount()} items)</h1>
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8">Shopping Cart ({getItemCount()} items)</h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
         <div className="lg:col-span-2 space-y-4">
           {items.map((item) => {
             const price = calculateDiscount(item.price, item.discount);
             return (
-              <div key={item.productId} className="flex gap-4 p-4 border border-neutral-200">
-                <div className="relative w-24 h-24 bg-neutral-100 flex-shrink-0">
+              <div key={item.productId} className="flex gap-3 sm:gap-4 p-3 sm:p-4 border border-border">
+                <div className="relative w-20 h-20 sm:w-24 sm:h-24 bg-muted shrink-0">
                   <Image src={item.image} alt={item.title} fill className="object-cover" />
                 </div>
                 <div className="flex-1">
