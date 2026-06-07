@@ -77,8 +77,8 @@ export default function RegisterPage() {
         onClose={handleWelcomeClose}
       />
 
-      <div className="min-h-[calc(100vh-4rem)] flex">
-        <div className="hidden lg:flex lg:w-1/2 bg-foreground text-background items-center justify-center p-12">
+      <div className="min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)] flex flex-1 w-full">
+        <div className="hidden lg:flex lg:w-1/2 bg-foreground text-background items-center justify-center p-12 min-h-full">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}

@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Truck, Shield, RefreshCw, Headphones } from "lucide-react";
+import { Truck, Shield, RefreshCw, Headphones } from "lucide-react";
 import { connectDB } from "@/lib/db";
 import Product from "@/models/Product";
 import { getCategoriesWithCounts } from "@/lib/categories";
 import { adminProductFilter } from "@/lib/products";
 import Button from "@/components/ui/Button";
+import ShopNowButton from "@/components/home/ShopNowButton";
 import HomeProductSections from "@/components/home/HomeProductSections";
 import type { IProduct, ICategory } from "@/types";
 
@@ -54,11 +55,7 @@ export default async function HomePage() {
               Discover curated men&apos;s suits and luxury timepieces crafted for those who demand excellence.
             </p>
             <div className="flex flex-wrap gap-4">
-              <Link href="/shop">
-                <Button size="lg" className="bg-white text-black hover:bg-neutral-200">
-                  Shop Now <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
-              </Link>
+              <ShopNowButton />
               <Link href="/categories">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black">
                   Browse Categories

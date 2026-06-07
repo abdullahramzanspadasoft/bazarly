@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased bg-background text-foreground`}>
         <Providers>
           <Header />
-          <main className="min-h-screen">{children}</main>
+          <main className="min-h-[calc(100vh-3.5rem)] sm:min-h-[calc(100vh-4rem)]">{children}</main>
           <ConditionalFooter />
         </Providers>
       </body>
