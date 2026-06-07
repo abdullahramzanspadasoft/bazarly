@@ -8,29 +8,19 @@ import { slugify } from "@/lib/utils";
 
 const categories = [
   {
-    name: "Men's Suits",
-    description: "Premium tailored suits for the modern gentleman. Crafted with finest fabrics and impeccable attention to detail.",
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800&q=80",
+    name: "Airpods",
+    description: "Premium wireless earbuds with crystal-clear sound and all-day comfort.",
+    image: "https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?w=800&q=80",
   },
   {
-    name: "Luxury Watches",
+    name: "Kids Toys",
+    description: "Soft plush toys and fun collectibles for kids and the young at heart.",
+    image: "/categories/kids-toys.png",
+  },
+  {
+    name: "Watches",
     description: "Exquisite timepieces from renowned brands. Precision engineering meets timeless elegance.",
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
-  },
-  {
-    name: "Electronics",
-    description: "Cutting-edge gadgets and smart devices. Premium electronics for modern living and productivity.",
-    image: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800&q=80",
-  },
-  {
-    name: "Portable Hand Fans",
-    description: "Stay cool anywhere with compact, rechargeable portable hand fans. Perfect for travel, office, and outdoor use.",
-    image: "/categories/portable-hand-fans.png",
-  },
-  {
-    name: "Shoes",
-    description: "Premium footwear for every occasion. From casual sneakers to formal dress shoes and luxury loafers.",
-    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80",
   },
 ];
 
@@ -143,7 +133,7 @@ const products = [
       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
       "https://images.unsplash.com/photo-1524592312884-fffc6a2d2a?w=800&q=80",
     ],
-    category: "Luxury Watches",
+    category: "Watches",
     stock: 10,
     featured: true,
     bestSeller: true,
@@ -159,7 +149,7 @@ const products = [
       "https://images.unsplash.com/photo-1524592312884-fffc6a2d2a?w=800&q=80",
       "https://images.unsplash.com/photo-1548171914-e79a0902e4a?w=800&q=80",
     ],
-    category: "Luxury Watches",
+    category: "Watches",
     stock: 6,
     featured: true,
     bestSeller: false,
@@ -175,7 +165,7 @@ const products = [
       "https://images.unsplash.com/photo-1548171914-e79a0902e4a?w=800&q=80",
       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
     ],
-    category: "Luxury Watches",
+    category: "Watches",
     stock: 14,
     featured: true,
     bestSeller: true,
@@ -191,7 +181,7 @@ const products = [
       "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=80",
       "https://images.unsplash.com/photo-1524592312884-fffc6a2d2a?w=800&q=80",
     ],
-    category: "Luxury Watches",
+    category: "Watches",
     stock: 3,
     featured: true,
     bestSeller: false,
@@ -207,7 +197,7 @@ const products = [
       "https://images.unsplash.com/photo-1587836374828-4dbafa94de0f?w=800&q=80",
       "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80",
     ],
-    category: "Luxury Watches",
+    category: "Watches",
     stock: 9,
     featured: false,
     bestSeller: true,
@@ -223,7 +213,7 @@ const products = [
       "https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=800&q=80",
       "https://images.unsplash.com/photo-1548171914-e79a0902e4a?w=800&q=80",
     ],
-    category: "Luxury Watches",
+    category: "Watches",
     stock: 11,
     featured: false,
     bestSeller: false,
@@ -538,6 +528,9 @@ export async function syncCatalog() {
   if (mongoose.connection.readyState !== 1) {
     await connectDB();
   }
+
+  const allowedSlugs = categories.map((cat) => slugify(cat.name));
+  await Category.deleteMany({ slug: { $nin: allowedSlugs } });
 
   for (const cat of categories) {
     await Category.findOneAndUpdate(
