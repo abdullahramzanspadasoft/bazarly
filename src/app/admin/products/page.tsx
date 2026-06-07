@@ -10,6 +10,7 @@ import Badge from "@/components/ui/Badge";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Modal from "@/components/ui/Modal";
 import Input from "@/components/ui/Input";
+import ImageUploader from "@/components/ui/ImageUploader";
 import { formatPrice } from "@/lib/utils";
 import type { IProduct } from "@/types";
 
@@ -19,7 +20,7 @@ export default function AdminProductsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [deleteModal, setDeleteModal] = useState<IProduct | null>(null);
   const [deleting, setDeleting] = useState(false);
-  const [form, setForm] = useState({ title: "", description: "", price: "", discount: "0", category: "", stock: "" });
+  const [form, setForm] = useState({ title: "", description: "", price: "", discount: "0", category: "", stock: "", image: "" });
   const [categories, setCategories] = useState<Array<{ _id: string; name: string }>>([]);
   const [saving, setSaving] = useState(false);
 
@@ -48,7 +49,9 @@ export default function AdminProductsPage() {
           discount: parseFloat(form.discount),
           category: form.category,
           stock: parseInt(form.stock),
-          images: ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80"],
+          images: form.image
+            ? [form.image]
+            : ["https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80"],
         }),
       });
       if (!res.ok) {
@@ -58,7 +61,7 @@ export default function AdminProductsPage() {
       }
       toast.success("Product created!");
       setModalOpen(false);
-      setForm({ title: "", description: "", price: "", discount: "0", category: "", stock: "" });
+      setForm({ title: "", description: "", price: "", discount: "0", category: "", stock: "", image: "" });
       fetchProducts();
     } catch {
       toast.error("Failed to create product");
@@ -189,6 +192,10 @@ export default function AdminProductsPage() {
             </div>
             <Input label="Stock" type="number" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} />
           </div>
+          <ImageUploader
+            value={form.image}
+            onChange={(url) => setForm({ ...form, image: url })}
+          />
           <Button onClick={handleCreate} loading={saving} className="w-full">Create Product</Button>
         </div>
       </Modal>

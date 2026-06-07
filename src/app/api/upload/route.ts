@@ -3,6 +3,11 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { auth } from "@/lib/auth";
 import { canManageProducts } from "@/lib/admin-users";
+import { isCloudinaryConfigured, uploadImageToCloudinary } from "@/lib/cloudinary";
+
+export const runtime = "nodejs";
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,8 +17,6 @@ export async function POST(req: NextRequest) {
     }
 
     const contentType = req.headers.get("content-type") || "";
-    const uploadDir = path.join(process.cwd(), "public", "uploads");
-    await mkdir(uploadDir, { recursive: true });
 
     let buffer: Buffer;
     let ext = "jpg";
@@ -38,6 +41,10 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "No file provided" }, { status: 400 });
       }
 
+      if (file.size > MAX_FILE_SIZE) {
+        return NextResponse.json({ error: "Image must be under 5MB" }, { status: 400 });
+      }
+
       const bytes = await file.arrayBuffer();
       buffer = Buffer.from(bytes);
       const nameParts = file.name.split(".");
@@ -45,6 +52,30 @@ export async function POST(req: NextRequest) {
         ext = nameParts.pop()!.toLowerCase();
       }
     }
+
+    if (buffer.length > MAX_FILE_SIZE) {
+      return NextResponse.json({ error: "Image must be under 5MB" }, { status: 400 });
+    }
+
+    // Vercel has a read-only filesystem — use Cloudinary in production
+    if (isCloudinaryConfigured()) {
+      const url = await uploadImageToCloudinary(buffer, ext);
+      return NextResponse.json({ url });
+    }
+
+    if (process.env.VERCEL) {
+      return NextResponse.json(
+        {
+          error:
+            "Image upload not configured on server. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET in Vercel environment variables.",
+        },
+        { status: 500 }
+      );
+    }
+
+    // Local development fallback — save to public/uploads
+    const uploadDir = path.join(process.cwd(), "public", "uploads");
+    await mkdir(uploadDir, { recursive: true });
 
     const filename = `product-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
     const filepath = path.join(uploadDir, filename);

@@ -17,7 +17,11 @@ export function calculateDiscount(price: number, discount: number): number {
 }
 
 export function isUploadedImage(src: string): boolean {
-  return src.startsWith("/uploads/") || src.startsWith("/api/images/");
+  return (
+    src.startsWith("/uploads/") ||
+    src.startsWith("/api/images/") ||
+    src.includes("res.cloudinary.com")
+  );
 }
 
 export function slugify(text: string): string {
