@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { getSessionToken, isAdminToken } from "@/lib/auth-middleware";
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  const token = await getSessionToken(req);
   const isLoggedIn = !!token;
-  const isAdmin = token?.role === "admin";
+  const isAdmin = isAdminToken(token);
 
   const protectedRoutes = ["/dashboard", "/checkout", "/wishlist"];
   const adminRoutes = ["/admin"];
@@ -27,5 +27,13 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/checkout", "/wishlist", "/admin/:path*", "/login", "/register"],
+  matcher: [
+    "/dashboard/:path*",
+    "/checkout",
+    "/wishlist",
+    "/admin",
+    "/admin/:path*",
+    "/login",
+    "/register",
+  ],
 };
