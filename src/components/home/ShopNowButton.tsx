@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { getClientAuthPath } from "@/lib/auth-redirect";
 
 export default function ShopNowButton() {
   const { data: session, status } = useSession();
@@ -14,7 +15,7 @@ export default function ShopNowButton() {
     if (session?.user) {
       router.push("/shop");
     } else {
-      router.push("/login?callbackUrl=/shop");
+      router.push(getClientAuthPath("/shop"));
     }
   };
 

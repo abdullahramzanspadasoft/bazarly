@@ -143,12 +143,12 @@ export default function ChatWidget() {
               </div>
             ) : !session ? (
               <div className="text-center py-8 text-sm text-muted-foreground">
-                <p className="mb-3">Sign in to chat with our support team</p>
+                <p className="mb-3">Create an account to chat with our support team</p>
                 <Link
-                  href="/login"
+                  href="/register"
                   className="inline-block px-4 py-2 bg-foreground text-background text-sm font-medium"
                 >
-                  Sign In
+                  Create Account
                 </Link>
               </div>
             ) : messages.length === 0 ? (

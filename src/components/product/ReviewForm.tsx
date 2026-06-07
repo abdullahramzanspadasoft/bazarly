@@ -27,7 +27,7 @@ export default function ReviewForm({ productId }: ReviewFormProps) {
   if (!session) {
     return (
       <p className="text-sm text-neutral-500">
-        <Link href="/login" className="font-medium hover:underline">Sign in</Link> to leave a review.
+        <Link href="/register" className="font-medium hover:underline">Create an account</Link> to leave a review.
       </p>
     );
   }

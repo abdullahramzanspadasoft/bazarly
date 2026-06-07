@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import WelcomeModal from "@/components/auth/WelcomeModal";
+import { getLoginUrl, setReturningUserClient } from "@/lib/auth-redirect";
 import { registerSchema, type RegisterInput } from "@/lib/validations";
 
 export default function RegisterPage() {
@@ -56,10 +57,12 @@ export default function RegisterPage() {
 
       if (signInResult?.error) {
         toast.error("Account created but login failed. Please sign in.");
-        router.push("/login");
+        setReturningUserClient();
+        router.push(getLoginUrl());
         return;
       }
 
+      setReturningUserClient();
       setUserName(data.name);
       setShowWelcome(true);
     } catch {
@@ -136,7 +139,7 @@ export default function RegisterPage() {
 
             <p className="mt-6 text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/login" className="font-medium text-foreground hover:underline">
+              <Link href={getLoginUrl()} className="font-medium text-foreground hover:underline">
                 Sign in
               </Link>
             </p>

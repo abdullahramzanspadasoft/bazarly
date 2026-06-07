@@ -13,7 +13,9 @@ import { useCartStore } from "@/store/cart";
 import { useWishlistStore } from "@/store/wishlist";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import AdminNotificationBell from "@/components/admin/AdminNotificationBell";
+import AuthHeaderButton from "@/components/auth/AuthHeaderButton";
 import { isAdminEmail } from "@/lib/admin-users";
+import { getLoginUrl } from "@/lib/auth-redirect";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -236,27 +238,27 @@ export default function Header() {
               type="button"
               onClick={() => {
                 setMobileOpen(false);
-                signOut({ callbackUrl: "/login" });
+                signOut({ callbackUrl: getLoginUrl() });
               }}
               className="flex items-center justify-center gap-2 w-full py-3 rounded-lg border border-red-500/40 text-red-400 text-sm font-medium hover:bg-red-500/10 transition-colors"
             >
               <LogOut className="w-4 h-4" /> Sign Out
             </button>
           ) : (
-            <div className="grid grid-cols-2 gap-2">
-              <Link
-                href="/login"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center py-3 rounded-lg border border-background/30 text-sm font-medium hover:bg-background/10 transition-colors"
-              >
-                Sign In
-              </Link>
+            <div className="grid grid-cols-1 gap-2">
               <Link
                 href="/register"
                 onClick={() => setMobileOpen(false)}
                 className="flex items-center justify-center py-3 rounded-lg bg-background text-foreground text-sm font-medium hover:opacity-90 transition-opacity"
               >
-                Join Us
+                Create Account
+              </Link>
+              <Link
+                href={getLoginUrl()}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center py-3 rounded-lg border border-background/30 text-sm font-medium hover:bg-background/10 transition-colors"
+              >
+                Already have an account? Sign In
               </Link>
             </div>
           )}
@@ -390,7 +392,7 @@ export default function Header() {
                         type="button"
                         onClick={() => {
                           setUserMenuOpen(false);
-                          signOut({ callbackUrl: "/login" });
+                          signOut({ callbackUrl: getLoginUrl() });
                         }}
                         className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-muted w-full text-left text-red-600"
                       >
@@ -400,12 +402,7 @@ export default function Header() {
                   </div>
                 </div>
               ) : (
-                <Link
-                  href="/login"
-                  className="hidden sm:inline-flex px-3 sm:px-4 py-1.5 sm:py-2 bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
-                >
-                  Sign In
-                </Link>
+                <AuthHeaderButton />
               )}
             </div>
           </div>

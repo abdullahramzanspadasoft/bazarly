@@ -13,6 +13,7 @@ import Button from "@/components/ui/Button";
 import StripePaymentForm from "@/components/checkout/StripePaymentForm";
 import { checkoutSchema, type CheckoutInput } from "@/lib/validations";
 import { formatPrice } from "@/lib/utils";
+import { getClientAuthPath } from "@/lib/auth-redirect";
 
 const paymentMethods = [
   { id: "stripe" as const, label: "Credit/Debit Card (Stripe)", icon: CreditCard },
@@ -161,7 +162,9 @@ export default function CheckoutPage() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-16 text-center">
         <p className="text-muted-foreground mb-4">Please sign in to checkout</p>
-        <Button onClick={() => router.push("/login")}>Sign In</Button>
+        <Button onClick={() => router.push(getClientAuthPath("/checkout"))}>
+          Continue to Account
+        </Button>
       </div>
     );
   }
