@@ -1,8 +1,6 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { SlidersHorizontal, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import type { ICategory } from "@/types";
 
@@ -13,7 +11,6 @@ interface ProductFiltersProps {
 export default function ProductFilters({ categories }: ProductFiltersProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const currentCategory = searchParams.get("category") || "";
   const currentSort = searchParams.get("sort") || "createdAt";
@@ -102,28 +99,5 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
     </div>
   );
 
-  return (
-    <>
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="lg:hidden flex items-center gap-2 px-4 py-2 border border-neutral-300 text-sm mb-4"
-      >
-        <SlidersHorizontal className="w-4 h-4" /> Filters
-      </button>
-
-      <aside className="hidden lg:block w-64 flex-shrink-0">{filterContent}</aside>
-
-      {mobileOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-white">
-          <div className="flex items-center justify-between p-4 border-b">
-            <h2 className="font-semibold">Filters</h2>
-            <button onClick={() => setMobileOpen(false)}>
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-          <div className="p-4">{filterContent}</div>
-        </div>
-      )}
-    </>
-  );
+  return <aside className="hidden lg:block w-64 flex-shrink-0">{filterContent}</aside>;
 }

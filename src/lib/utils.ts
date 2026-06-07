@@ -5,11 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+const USD_TO_PKR_RATE = Number(process.env.NEXT_PUBLIC_USD_TO_PKR_RATE) || 280;
+
 export function formatPrice(price: number): string {
-  return new Intl.NumberFormat("en-US", {
+  const pkr = Math.round(price * USD_TO_PKR_RATE);
+  return new Intl.NumberFormat("en-PK", {
     style: "currency",
-    currency: "USD",
-  }).format(price);
+    currency: "PKR",
+    maximumFractionDigits: 0,
+  }).format(pkr);
 }
 
 export function calculateDiscount(price: number, discount: number): number {

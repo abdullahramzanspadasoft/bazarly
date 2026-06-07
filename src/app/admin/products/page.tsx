@@ -173,7 +173,7 @@ export default function AdminProductsPage() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Input label="Price" type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
+            <Input label="Price (USD)" type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
             <Input label="Discount %" type="number" value={form.discount} onChange={(e) => setForm({ ...form, discount: e.target.value })} />
           </div>
           <div className="grid grid-cols-2 gap-4">

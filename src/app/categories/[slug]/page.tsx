@@ -97,7 +97,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   const { category, products, total, pages, page } = data;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-8">
       <nav className="text-sm text-muted-foreground mb-6">
         <Link href="/" className="hover:text-foreground">Home</Link>
         <span className="mx-2">/</span>
@@ -140,14 +140,14 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
         </div>
       )}
 
-      <div className="flex gap-8">
+      <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
         {!isAdmin && (
           <Suspense fallback={<LoadingSpinner />}>
             <CategoryFilters slug={slug} />
           </Suspense>
         )}
 
-        <div className="flex-1">
+        <div className="flex-1 min-w-0 w-full">
           <CategoryProductSection
             products={products}
             categoryId={category._id}
